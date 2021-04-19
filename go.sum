@@ -1,0 +1,4 @@
+github.com/libvirt/libvirt-go v7.0.0+incompatible h1:twXBsJe7klsz2Zogxm4GJF5aBRPmdY72RX8nDumB86A=
+github.com/libvirt/libvirt-go v7.0.0+incompatible/go.mod h1:34zsnB4iGeOv7Byj6qotuW8Ya4v4Tr43ttjz/F0wjLE=
+github.com/libvirt/libvirt-go-xml v7.2.0+incompatible h1:rP5hmmiox00Jqfk9Z1btq8Z6haLlwpA/+b46r5wMHow=
+github.com/libvirt/libvirt-go-xml v7.2.0+incompatible/go.mod h1:oBlgD3xOA01ihiK5stbhFzvieyW+jVS6kbbsMVF623A=
