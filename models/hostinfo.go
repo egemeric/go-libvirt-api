@@ -1,0 +1,80 @@
+package models
+
+type ProcCpuinfo struct {
+	Processor       int
+	VendorID        string
+	CPUFamily       int
+	Model           int
+	ModelName       string
+	Stepping        int
+	Microcode       string
+	CPUMhz          float32
+	CacheSize       string
+	PhysicalID      int
+	Siblings        int
+	CoreID          int
+	CPUCores        int
+	ApicID          int
+	InitialApicID   int
+	Fpu             string
+	FpuException    string
+	CpuidLevel      int
+	Wp              string
+	Flags           []string
+	Bugs            string
+	Bogomips        float32
+	ClflushSize     int
+	CacheAlignment  int
+	AddressSizes    string
+	PowerManagement string
+}
+
+type ProcMeminfo struct {
+	MemTotal          int
+	MemFree           int
+	MemAvailable      int
+	Buffers           int
+	Cached            int
+	SwapCached        int
+	Active            int
+	Inactive          int
+	ActiveAanon       int
+	InactiveAanon     int
+	ActiveFile        int
+	InactiveFile      int
+	Unevictable       int
+	Mlocked           int
+	SwapTotal         int
+	SwapFree          int
+	Dirty             int
+	Writeback         int
+	AnonPages         int
+	Mapped            int
+	Shmem             int
+	Slab              int
+	SReclaimable      int
+	SUnreclaim        int
+	KernelStack       int
+	PageTables        int
+	NFSUnstable       int
+	Bounce            int
+	WritebackTmp      int
+	CommitLimit       int
+	CommittedAS       int
+	VmallocTotal      int
+	VmallocUsed       int
+	VmallocChunk      int
+	HardwareCorrupted int
+	AnonHugePages     int
+	ShmemHugePages    int
+	ShmemPmdMapped    int
+	HugePagesTotal    int
+	HugePagesFree     int
+	HugePagesRsvd     int
+	HugePagesSurp     int
+	Hugepagesize      int
+	Hugetlb           int
+	DirectMap4k       int
+	DirectMap2M       int
+	DirectMap1G       int
+}
