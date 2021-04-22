@@ -1,7 +1,6 @@
 package vm_query
 
 import (
-	"fmt"
 	"libvirt-go-api/connector"
 	"libvirt-go-api/models"
 	"log"
@@ -132,12 +131,4 @@ func GetActiveNetworks() []models.VirtNet {
 
 	}
 	return virtnets
-}
-
-func Cpu() {
-	interfaces, err := connector.Libvirt.Connection.ListInterfaces()
-	if err != nil {
-		log.Fatalln(err)
-	}
-	fmt.Println(interfaces)
 }
