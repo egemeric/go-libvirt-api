@@ -46,32 +46,46 @@ func GetDomsInActive() (domains []models.Domains) {
 	return domains
 }
 
-func GetDomStats(Uuid string) (d *models.DomStatus) {
+func GetDomStats(Uuid string) (d *models.DomStatus, err error) {
 	var i []models.DomInterfaces
+	var pids []string
 	dom, err := connector.Libvirt.Connection.LookupDomainByUUIDString(Uuid)
 	if err != nil {
-		log.Fatalln(err)
+		return d, err
 	}
 	dom_status, err := dom.IsActive()
 	dom_info, err := dom.GetInfo()
 	dom_name, err := dom.GetName()
+	//dom_os, _ := dom.GetGuestInfo(libvirt.DOMAIN_GUEST_INFO_OS, 0)
 	if err != nil {
-		log.Fatal(err)
+		return d, err
 	}
 	xml_desc, _ := dom.GetXMLDesc(0)
 	domcfg := &libvirtxml.Domain{}
 	err = domcfg.Unmarshal(xml_desc)
 	if err != nil {
-		log.Fatal(err)
+		return d, err
 	}
+	if dom_status {
+		for _, mac_addr := range domcfg.Devices.Interfaces {
+			i = append(i, models.DomInterfaces{Macaddr: mac_addr.MAC.Address, Name: mac_addr.Alias.Name})
 
-	for _, mac_addr := range domcfg.Devices.Interfaces {
-		i = append(i, models.DomInterfaces{Macaddr: mac_addr.MAC.Address, Name: mac_addr.Alias.Name})
+		}
 
+		pids = GetVmPids(dom)
 	}
-	pids := GetVmPids(dom)
-	d = &models.DomStatus{Status: dom_status, Name: dom_name, Uuid: Uuid, Cputime: dom_info.CpuTime, Maxmemory: dom_info.MaxMem, Memory: dom_info.Memory, Virtcpuct: dom_info.NrVirtCpu, Domxml: xml_desc, Interfaces: i, P_ids: pids}
-	return d
+	d = &models.DomStatus{Status: dom_status,
+		Name:       dom_name,
+		Uuid:       Uuid,
+		Cputime:    dom_info.CpuTime,
+		Maxmemory:  dom_info.MaxMem,
+		Memory:     dom_info.Memory,
+		Virtcpuct:  dom_info.NrVirtCpu,
+		Domxml:     xml_desc,
+		Interfaces: i,
+		P_ids:      pids,
+	}
+	return d, err
 }
 
 func GetAllDomains() (domains []models.Domains) {
